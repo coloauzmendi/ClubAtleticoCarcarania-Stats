@@ -1,4 +1,4 @@
-# ⚽ Cremeria FC — Estadísticas
+# ⚽ Club Atletico Carcaraña — Estadísticas
 
 Aplicación web para gestionar las estadísticas del **Club Atlético Carcarañá**, desarrollada como proyecto personal.
 
