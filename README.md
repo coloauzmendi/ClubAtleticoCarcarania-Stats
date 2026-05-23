@@ -1,6 +1,6 @@
 # ⚽ Cremeria FC — Estadísticas
 
-Aplicación web para gestionar las estadísticas del **Club Atlético Carcarañá** (La Cremeria), desarrollada como proyecto personal mientras estudio Tecnicatura en Programación en la UTN Rosario.
+Aplicación web para gestionar las estadísticas del **Club Atlético Carcarañá**, desarrollada como proyecto personal.
 
 ## 🚀 Demo
 
@@ -45,5 +45,5 @@ cremeria-stats/
 
 ## 👨‍💻 Autor
 
-**Tobias Auzmendi** — Estudiante de Tecnicatura en Programación, UTN Rosario  
+**Tobias Auzmendi** — Estudiante de Programación, UTN Rosario.
 Carcarañá, Santa Fe, Argentina
