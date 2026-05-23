@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cremeria FC — Estadísticas</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- ====== HEADER ====== -->
+  <header>
+    <div class="header-inner">
+      <div class="escudo">⚽</div>
+      <div class="header-text">
+        <h1>Cremeria FC</h1>
+        <p>Club Atlético Carcarañá — Estadísticas</p>
+      </div>
+    </div>
+  </header>
+
+  <!-- ====== STATS BAR ====== -->
+  <div class="stats-bar">
+    <div class="stats-bar-inner">
+      <div class="stat-pill">
+        <div class="stat-num" id="total-partidos">0</div>
+        <div class="stat-label">Partidos</div>
+      </div>
+      <div class="stat-pill">
+        <div class="stat-num" id="total-victorias">0</div>
+        <div class="stat-label">Victorias</div>
+      </div>
+      <div class="stat-pill">
+        <div class="stat-num" id="total-empates">0</div>
+        <div class="stat-label">Empates</div>
+      </div>
+      <div class="stat-pill">
+        <div class="stat-num" id="total-derrotas">0</div>
+        <div class="stat-label">Derrotas</div>
+      </div>
+      <div class="stat-pill">
+        <div class="stat-num" id="total-goles">0</div>
+        <div class="stat-label">Goles</div>
+      </div>
+      <div class="stat-pill">
+        <div class="stat-num" id="total-jugadores">0</div>
+        <div class="stat-label">Jugadores</div>
+      </div>
+      <div class="stat-pill">
+        <div class="stat-num" id="total-pct">—</div>
+        <div class="stat-label">% Victorias</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ====== MAIN ====== -->
+  <main>
+
+    <!-- Agregar jugador -->
+    <div class="panel">
+      <div class="panel-header">
+        <span class="panel-title">👤 Agregar Jugador</span>
+      </div>
+      <div class="panel-body">
+        <div class="form-group">
+          <label>Nombre completo</label>
+          <input type="text" id="jugador-nombre" placeholder="Ej: Gino De Gasperi">
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Posición</label>
+            <select id="jugador-posicion">
+              <option value="Portero">Portero</option>
+              <option value="Defensa">Defensa</option>
+              <option value="Mediocampista" selected>Mediocampista</option>
+              <option value="Delantero">Delantero</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Número</label>
+            <input type="number" id="jugador-numero" placeholder="10" min="1" max="99">
+          </div>
+        </div>
+        <button class="btn" onclick="agregarJugador()">Agregar Jugador</button>
+      </div>
+    </div>
+
+    <!-- Cargar partido -->
+    <div class="panel">
+      <div class="panel-header">
+        <span class="panel-title">📋 Cargar Partido</span>
+      </div>
+      <div class="panel-body">
+        <div class="form-row">
+          <div class="form-group">
+            <label>Rival</label>
+            <input type="text" id="partido-rival" placeholder="Ej: Atlético Cañada">
+          </div>
+          <div class="form-group">
+            <label>Fecha</label>
+            <input type="date" id="partido-fecha">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Goles Cremeria</label>
+            <input type="number" id="partido-goles-local" min="0" value="0">
+          </div>
+          <div class="form-group">
+            <label>Goles Rival</label>
+            <input type="number" id="partido-goles-rival" min="0" value="0">
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Competencia</label>
+          <select id="partido-competencia">
+            <option>Liga Local</option>
+            <option>Copa</option>
+            <option>Amistoso</option>
+            <option>Torneo Regional</option>
+          </select>
+        </div>
+        <button class="btn" onclick="cargarPartido()">Guardar Partido</button>
+      </div>
+    </div>
+
+    <!-- Registrar gol -->
+    <div class="panel">
+      <div class="panel-header">
+        <span class="panel-title">⚡ Registrar Gol / Asistencia</span>
+      </div>
+      <div class="panel-body">
+        <div class="form-group">
+          <label>Partido</label>
+          <select id="evento-partido">
+            <option value="">— Seleccioná un partido —</option>
+          </select>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Goleador</label>
+            <select id="evento-goleador">
+              <option value="">— Jugador —</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Asistencia (opcional)</label>
+            <select id="evento-asistencia">
+              <option value="">— Sin asistencia —</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Minuto</label>
+          <input type="number" id="evento-minuto" min="1" max="120" placeholder="45">
+        </div>
+        <button class="btn" onclick="registrarGol()">Registrar Gol</button>
+      </div>
+    </div>
+
+    <!-- Tabla de goleadores -->
+    <div class="panel">
+      <div class="panel-header">
+        <span class="panel-title">🥇 Tabla de Goleadores</span>
+      </div>
+      <div class="panel-body" id="tabla-goleadores">
+        <div class="empty-state"><span>⚽</span>Aún no hay goles registrados</div>
+      </div>
+    </div>
+
+    <!-- Historial de partidos -->
+    <div class="panel panel-full">
+      <div class="panel-header">
+        <span class="panel-title">📅 Historial de Partidos</span>
+        <div id="filtros-competencia" style="display:flex;gap:8px;flex-wrap:wrap"></div>
+      </div>
+      <div id="tabla-partidos-container">
+        <div class="empty-state"><span>📋</span>Aún no hay partidos cargados</div>
+      </div>
+    </div>
+
+    <!-- Plantel -->
+    <div class="panel panel-full">
+      <div class="panel-header">
+        <span class="panel-title">👥 Plantel</span>
+      </div>
+      <div id="tabla-plantel-container">
+        <div class="empty-state"><span>👤</span>Aún no hay jugadores registrados</div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- ====== MODAL CONFIRMAR ====== -->
+  <div class="modal-overlay" id="modal">
+    <div class="modal-box">
+      <p id="modal-mensaje"></p>
+      <div class="modal-btns">
+        <button class="btn btn-danger" id="modal-si">Sí, eliminar</button>
+        <button class="btn btn-gris" id="modal-no">Cancelar</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ====== MODAL EDITAR JUGADOR ====== -->
+  <div class="modal-overlay" id="modal-editar">
+    <div class="modal-box">
+      <p style="font-family:'Bebas Neue',cursive;font-size:20px;letter-spacing:2px;margin-bottom:16px">Editar Jugador</p>
+      <input type="hidden" id="edit-id">
+      <div class="form-group">
+        <label>Nombre completo</label>
+        <input type="text" id="edit-nombre">
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Posición</label>
+          <select id="edit-posicion">
+            <option value="Portero">Portero</option>
+            <option value="Defensa">Defensa</option>
+            <option value="Mediocampista">Mediocampista</option>
+            <option value="Delantero">Delantero</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Número</label>
+          <input type="number" id="edit-numero" min="1" max="99">
+        </div>
+      </div>
+      <div class="modal-btns">
+        <button class="btn" onclick="guardarEdicion()">Guardar cambios</button>
+        <button class="btn btn-gris" onclick="cerrarEditar()">Cancelar</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Notificación flotante -->
+  <div class="notif" id="notif"></div>
+
+  <script src="app.js"></script>
+</body>
+</html>
